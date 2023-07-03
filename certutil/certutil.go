@@ -14,29 +14,29 @@ type HashFileStruct struct {
 type Certutil interface {
 
 	//对多文件进行哈希
-	HashFiles(filePath []string) ([]HashFileStruct, error)
+	HashFiles(filePath []string) []HashFileStruct
 
 	//对单个文件进行哈希
 	HashFile(filePath string) ([]HashFileStruct, error)
 }
 
-type Instance func() Certutil
+type CertInstance func() Certutil
 
-var adapters = make(map[string]Instance)
+var certAdapters = make(map[string]CertInstance)
 
 // 注册哈希类型
-func Register(hashType string, adapter Instance) {
+func CertRegister(hashType string, adapter CertInstance) {
 	if adapter == nil {
 		panic(fmt.Errorf("Certutil: Register adapter is nil"))
 	}
-	if _, ok := adapters[hashType]; ok {
+	if _, ok := certAdapters[hashType]; ok {
 		panic("Certutil: Register called twice for adapter " + hashType)
 	}
-	adapters[hashType] = adapter
+	certAdapters[hashType] = adapter
 }
 
 func NewCretutil(adapterName string, config interface{}) (adapter Certutil, err error) {
-	instanceFunc, ok := adapters[adapterName]
+	instanceFunc, ok := certAdapters[adapterName]
 	if !ok {
 		log.Printf("Certutil: unknown adapter name %s", adapterName)
 		return
