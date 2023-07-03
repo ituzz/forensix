@@ -8,5 +8,5 @@ func TestOut(t *testing.T) {
 	certUtil, _ := NewCretutil("MD5", nil)
 	hfs := certUtil.HashFiles(filePath)
 	outUtil, _ := NewOututil("TXT", nil)
-	outUtil.out(hfs)
+	_ = outUtil.out(hfs)
 }
