@@ -17,7 +17,7 @@ func NewOutCsv() Oututil {
 	return &oututil
 }
 
-func (o *OutCsv) out(hfs []HashFileStruct) error {
+func (o *OutCsv) Out(hfs []HashFileStruct) error {
 	file, err := os.Create(fmt.Sprintf("./%s.csv", time.Now().Format("20060102")))
 	if err != nil {
 		log.Printf("创建CSV文件失败: %v", err)

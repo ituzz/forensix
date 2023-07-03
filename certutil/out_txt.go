@@ -15,7 +15,7 @@ func NewOutTxt() Oututil {
 	return &oututil
 }
 
-func (o *OutTxt) out(hfs []HashFileStruct) error {
+func (o *OutTxt) Out(hfs []HashFileStruct) error {
 	file, err := os.Create(fmt.Sprintf("./%s.txt", time.Now().Format("20060102")))
 	if err != nil {
 		log.Printf("创建TXT文件失败: %v", err)

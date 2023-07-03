@@ -6,7 +6,7 @@ import (
 )
 
 type Oututil interface {
-	out(hfs []HashFileStruct) error
+	Out(hfs []HashFileStruct) error
 }
 
 type OutInstance func() Oututil

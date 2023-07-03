@@ -17,7 +17,7 @@ func NewOutHtml() Oututil {
 	return &oututil
 }
 
-func (o *OutHtml) out(hfs []HashFileStruct) error {
+func (o *OutHtml) Out(hfs []HashFileStruct) error {
 	tmpl, _ := template.New("webpage").Parse(htmlTpl)
 	htmlFile, err := os.OpenFile(fmt.Sprintf("./%s.html", time.Now().Format("20060102")), os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
